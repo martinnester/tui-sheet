@@ -1,0 +1,18 @@
+expression = or;
+or = and ("||" and)*;
+and = bw_or ("&&" bw_or)*;
+bw_or = bw_xor ("|" bw_xor)*;
+bw_xor = bw_and ("^" bw_and)*;
+bw_and = equality ("&" equality)*;
+equality = relational (("=="|"!=") relational)*;
+relational = shift (("<" | "<=" | ">" |">=") shift)*;
+shift = count (("<<" |">>") count)*;
+count = factor (("+"|"-") factor)*;
+factor =  pow (("*" | "/" | "%") pow)*;
+pow = unary ("**" unary)*;
+unary = ("!" | "-")* primary;
+primary = literal | "(" expression ")" | function;
+literal= INTEGER | FLOAT | BOOLEAN;
+
+function = IDENTIFIER "(" expression ("," expression)* ")";
+
